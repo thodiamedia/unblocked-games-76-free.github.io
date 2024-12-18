@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script data-cfasync="false">
+       window.addEventListener('DOMContentLoaded', () => {
+    const medRectDiv = document.createElement('div');
+    medRectDiv.id = "medium-rectangle";
+    medRectDiv.style.cssText = "display: flex; justify-content: center; margin-bottom: 20px";
+    document.querySelector('body > main > div.w-full.flex.flex-col.flex-grow.relative > div').appendChild(medRectDiv);
+
+    const leaderboardDiv = document.createElement('div');
+    leaderboardDiv.id = "mobile-leaderboard";
+    leaderboardDiv.style.cssText = "display: flex; justify-content: center";
+    document.querySelector('body > main > div.w-full.flex.flex-col.flex-grow.relative > div').appendChild(leaderboardDiv);
+
+		if (window.innerWidth <= 550) {
+			medRectDiv.remove();
+		} else {
+			leaderboardDiv.remove();
+		}
+
+        //    Info button, Heart, Stats, Question.  Close button selector same for all modals
+        document.querySelector('body > main > div.flex-none > header > div > div > div:nth-child(1) > button:nth-child(1)').addEventListener('click', () => modalAdCall(), false)
+        document.querySelector('body > main > div.flex-none > header > div > div > div:nth-child(1) > button:nth-child(2)').addEventListener('click', () => modalAdCall(), false)
+        document.querySelector('body > main > div.flex-none > header > div > div > div.flex.flex-1.justify-end > button:nth-child(1)').addEventListener('click', () => modalAdCall(), false)
+        document.querySelector('body > main > div.flex-none > header > div > div > div.flex.flex-1.justify-end > button:nth-child(2)').addEventListener('click', () => modalAdCall(), false)
+
+        function modalAdCall() {
+           
+                ramp.addUnits({ type: 'bottom_rail' }).then(() => ramp.displayUnits())
+           
+            document.querySelector('body > main > div.modal-background.p-3.pointer-events-none.svelte-1nyqrwd > div > div > div.flex.items-center.justify-center.mb-6 > div.justify-self-end.flex > button').addEventListener('click', () => closeModalCall(), false)
+            document.querySelector('body > main > div.modal-background.p-3.flex.justify-center.svelte-1nyqrwd').addEventListener('click', () => closeModalCall(), false)
+            document.querySelector('body > main > div.modal-background.p-3.pointer-events-none.svelte-1nyqrwd > div > div > div:nth-child(2) > div.justify-center.flex.py-2.mt-2 > button').addEventListener('click', () => closeModalCall(), false)
+           
+
+function closeModalCall() {
+	if (window.innerWidth <= 550){
+		 ramp.destroyUnits('all').then(() => {
+                    ramp.addUnits([{ type: 'left_rail' }, { type: 'right_rail' }, { type: 'corner_ad_video'}, { selectorId: 'mobile-leaderboard', type: 'leaderboard_atf' }]).then(() => ramp.displayUnits())
+                })
+	} else {
+		 ramp.destroyUnits('all').then(() => {
+                    ramp.addUnits([{ type: 'left_rail' }, { type: 'right_rail' }, { type: 'corner_ad_video'}, { selectorId: 'medium-rectangle', type: 'med_rect_atf' }]).then(() => ramp.displayUnits())
+                })
+	}
+               }
+
+            }
+    })
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heardle K-pop</title>
+<link rel="stylesheet" href="https://kpop.heardledecades.com/global.css">
+<link rel="stylesheet" href="https://kpop.heardledecades.com/bundle.css">
+
+<script defer src="https://kpop.heardledecades.com/v100/v100a.js"></script>
+
+ 
+</head>
+</html>
